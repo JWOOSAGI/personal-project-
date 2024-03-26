@@ -1,23 +1,65 @@
 package com.von.api.user;
-import lombok.*;
 
-@NoArgsConstructor
+import java.util.List;
+
+import com.von.api.order.Order;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@ToString(exclude = {"id"})
-
+@ToString
+@Entity(name = "users")
 public class User {
+
+    @Id
+    @Column(name = "userId",nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long id;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    private List<Order> orders;
+
+    @Column
     private String username;
+
+    @Column(name="password")
     private String password;
 
+    @Column(name="passwordConfirm")
     private String passwordConfirm;
+
+    @Column(name="name")
     private String name;
 
+    @Column(name="phone")
     private String phone;
+
+    @Column(name="addressId")
     private Long addressId;
+
+    @Column(name="job")
     private String job;
 
+    @Column(name="height")
     private double height;
+
+    @Column(name="weight")
     private double weight;
 
     @Builder(builderMethodName = "builder")

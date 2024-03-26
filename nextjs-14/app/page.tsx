@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const SERVER = 'http://localhost:8080'
 export default function Home() {
- const [name, setName] = useState('')
+ const [email, setName] = useState('')
  const handleChange = (e: any) => {
   setName(e.target.value)
  }
@@ -29,11 +29,12 @@ export default function Home() {
   )
  }
   return(<>
-  <div>Welcom to react world !!!</div>
+  <div>Welcom To React World !!!</div>
   <h3>이름 입력</h3>
   <input type="text" onChange={handleChange}/><br />
   <button onClick={handleClick}>전 송</button><br /><br />
   <Link href={"/login"}>로그인</Link><br />
-  <Link href={"/join"}> 회원가입</Link>
+  <Link href={"/join"}> 회원가입</Link><br />
+  <Link href={"/articles"}> 게시판</Link><br />
   </>)
 }

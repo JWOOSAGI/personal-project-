@@ -1,53 +1,52 @@
 package com.von.api.user;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.von.api.enums.Messenger;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
-@Service
-@RequiredArgsConstructor
-public class UserService {
-    private final UserRepository repository;
+public interface UserService {
+    String addUsers();
 
-    Map<String, ?> addUsers() {
-        return null;
-    }
+    Messenger save(User user);
 
-    Map<String, ?> login(User user) {
-        return null;
-    };
-    Map<String, ?> updatePassword(User user) {
-        return null;
-    };
-    Map<String, ?> findUsersByName(String name) {
-        return null;
-    };
-    Map<String, ?> findUsersByNameFromMap(String name) {
-        return null;
-    };
-    Map<String, ?> findUsersByJob(String job) {
-        return null;
-    };
-    Map<String, ?> findUsersByJobFromMap(String job) {
-        return null;
-    };
-    Map<String, ?> getUserMap() {
-        return null;
-    };
-    Map<String, ?> test() {
-        return null;
-    };
-    Map<String, ?> findUsers() throws SQLException {
-        return null;
-    };
-    Map<String, ?> mktable() throws SQLException {
-        return null;
-    };
-    Map<String, ?> rmtable() throws SQLException {
-        return null;
-    };
+    List<User> findAll();
+
+    Optional<User> findById(Long id);
+
+    String count();
+
+    Optional<User> getOne(String id);
+
+    String delete(User user);
+
+    String deleteAll();
+
+    Boolean existById(Long id);
+
+    String login(User user);
+
+    String changePassword(User user);
+
+    List<?> findUsersByName(String name);
+    Map<String, ?> findUsersByNameFromMap(String name);
+
+    List<?> findUsersByJob(String job);
+
+    Map<String, ?> findUsersByJobFromMap(String job);
+
+    Map<String, ?> getUserMap();
+
+    String test();
+
+
+    User findUser(String userName);
+
+    List<User> findUsers() throws SQLException;
+
+    Messenger createTable() throws SQLException;
+
+    Messenger deleteTable() throws SQLException;
 }

@@ -1,6 +1,8 @@
 'use client'
 
 import axios from "axios"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 const SERVER = 'http://localhost:8080'
@@ -13,9 +15,10 @@ export default function Login() {
     const handlePW = (e: any) => {
         setPW(e.target.value)
     }
+    const router = useRouter();
     const handleSubmit = () => {
-        alert('리퀘스트가 가져가는 ID : ' + userName + PW)
-        const url = `${SERVER}/login`
+        alert(userName + PW)
+        const url = `${SERVER}/api/login`
         const data = { userName: userName, PW:PW } //key and value가 같으면 생략가능(이건 생략안한거)
         const config = {
             headers: {
@@ -27,9 +30,20 @@ export default function Login() {
         }
         axios.post(url, data, config)
             .then(res => {
-                alert("리스폰스가 가져온 ID : " + JSON.stringify(res.data))
-            }
-            )
+                const message = res.data.message
+                alert((message))
+                if (message == null){
+                    alert("FAIL");
+                } else if(message === 'SUCCESS'){
+                    //alert("SUCCESS");
+                    router.push("/articles")
+                } else if(message === 'WRONG_PASSWORD'){
+                    alert("WRONG_PASSWORD");
+                } else{
+                    alert("지정되지 않은 값");
+                }
+                
+            })
     }
     return (<>
         <div>ID와 PW를 입력하세요.</div>
@@ -38,7 +52,8 @@ export default function Login() {
         <input type="text" onChange={handleUserName} />
         <h3>PW</h3>
         <input type="text" onChange={handlePW} />
-        <br />
-        <button onClick={handleSubmit}>로그인</button>
+        <br /><br />
+        <button onClick={handleSubmit}>로그인</button><br />
+        <Link href={"/"}> 홈</Link><br />
     </>)
 }

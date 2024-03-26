@@ -8,19 +8,25 @@ public class Inventory<T>{
     public Inventory(ArrayList<T> inventory) {
         this.inventory = new ArrayList<>();
     }
+
     public void add(T t){
         inventory.add(t);
     }
-    public T remove(int t){
-        return inventory.remove(t);
+
+    public T remove(int i) {
+        return inventory.remove(i);
     }
-    public boolean contains(T t){
+
+    public boolean contains(T t) {
         return inventory.contains(t);
     }
-    public T get(int t) {
-        return inventory.get(t);
+
+    public T get(int i) {
+        return inventory.get(i);
     }
+
     public void clear() {
         inventory.clear();
     }
 }
+
