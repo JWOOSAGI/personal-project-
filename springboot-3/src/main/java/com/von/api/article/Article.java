@@ -1,4 +1,4 @@
-package com.von.api.articles;
+package com.von.api.article;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,7 +9,7 @@ import lombok.*;
 @Entity(name = "articles")
 public class Article {
     @Id
-    @Column(name = "userId",nullable = false)
+    @Column(name="id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // primary key
     @Column

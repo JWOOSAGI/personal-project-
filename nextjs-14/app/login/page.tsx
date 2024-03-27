@@ -52,7 +52,6 @@ export default function Login() {
         <input type="text" onChange={handleUserName} />
         <h3>PW</h3>
         <input type="text" onChange={handlePW} />
-        <br /><br />
         <button onClick={handleSubmit}>로그인</button><br />
         <Link href={"/"}> 홈</Link><br />
     </>)

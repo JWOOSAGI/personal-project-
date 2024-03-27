@@ -1,28 +1,21 @@
 'use client'
-
-import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { DataGrid } from '@mui/x-data-grid';
+import { useRouter } from "next/navigation"
+const SERVER = 'http://localhost:8080'
+
 interface IArticle {
-    id : number,
+    id: number,
     title: string,
     content: string,
     writer: string
     registerDate: string
 }
-const router = useRouter();
 
-const Article = (props: IArticle) => {
-    return (
-        <tr key={props.id}>
-            <td>{props.title}</td>
-            <td>{props.content}</td>
-            <td>{props.writer}</td>
-            <td>{props.registerDate}</td>
-        </tr>
-    );
-};
-const SERVER = 'http://localhost:8080'
-export default function NewArticle() {
+export default function Articles() {
+    const router = useRouter();
+    const [articles, setArticles] = useState([])
 
     const url = `${SERVER}/api/articles`
     const config = {
@@ -33,31 +26,28 @@ export default function NewArticle() {
             "Access-Control-Allow-Origin": "*",
         }
     }
-    axios.get(url, config)
-        .then(res => {
-            const message = res.data.message
-            alert((message))
-            if (message === 'SUCCESS'){
-                alert('게시글이 있습니다.')
-            }else if(message === 'FAIL'){
-                alert("게시글이 없습니다.")
-            }else{
-                alert("지정되지 않은 값");
-            } 
-        })
+    useEffect(() => {
+        axios.get(url, config)
+            .then(res => {
+                const message = res.data.message
+                console.log((message))
+                if (message === 'SUCCESS') {
+                    console.log('게시글이 있습니다.');
+                    const arr = res.data.result
 
-    const articles = [
+                    for (let i of arr) {
+                        console.log(i)
+                    }
+                    setArticles(res.data.result)
+                    
+                } else if (message === 'FAIL') {
+                    console.log("게시글이 없습니다.");
+                } else {
+                    console.log("지정되지 않은 값");
+                }
 
-        {
-            id: 0,
-            title: '',
-            content: '',
-            writer: '',
-            registerDate: ''
-        }
-    ]
-    const articlesMap = articles.map((v) =>
-    (<Article  {...v} />))
+            })
+    }, [])
 
     return (<>
 
@@ -72,7 +62,14 @@ export default function NewArticle() {
                 </tr>
             </thead>
             <tbody>
-                {articlesMap}
+                {articles.map((props: IArticle) =>  (
+        <tr key={props.id}>
+            <td>{props.title}</td>
+            <td>{props.content}</td>
+            <td>{props.writer}</td>
+            <td>{props.registerDate}</td>
+        </tr>
+    ))}
             </tbody>
         </table>
 

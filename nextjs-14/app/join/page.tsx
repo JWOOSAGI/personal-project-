@@ -36,7 +36,8 @@ export default function Join() {
   }
   const router = useRouter();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: any) => {
+    e.preventDeafult()
     alert('리퀘스트가 가져가는 정보 : ' + username + psw + pswrepeat + phone + job + height + weight)
     const url = `${SERVER}/api/users`
     const data = { username, psw, pswrepeat,phone, job, height, weight }
@@ -48,7 +49,7 @@ export default function Join() {
         "Access-Control-Allow-Origin": "*",
       }
     }
-    axios.post(url, data, config)
+    axios.post(url, data, config) 
       .then(res => {
         alert("리스폰스가 가져온 이름 : " + JSON.stringify(res.data))
         router.push("/login")

@@ -1,4 +1,4 @@
-package com.von.api.articles;
+package com.von.api.article;
 
 public class ArticleService {
 }
