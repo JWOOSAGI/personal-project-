@@ -4,6 +4,9 @@ import axios from "axios"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { Button, Input } from "@mui/material";
+import AxiosConfig from "@/app/organisms/configs/axios-config"
+import { API } from "@/app/atmos/enums/API"
 
 const SERVER = 'http://localhost:8080'
 export default function Login() {
@@ -18,17 +21,7 @@ export default function Login() {
     const router = useRouter();
     const handleSubmit = () => {
         alert(userName + PW)
-        const url = `${SERVER}/api/login`
-        const data = { userName: userName, PW:PW } //key and value가 같으면 생략가능(이건 생략안한거)
-        const config = {
-            headers: {
-                "Cache-Control": "no-cache",
-                "Content-Type": "application/json",
-                Authorization: `Bearer blah ~`,
-                "Access-Control-Allow-Origin": "*",
-            }
-        }
-        axios.post(url, data, config)
+        axios.post(`${API.SERVER}/login`, { userName, PW }, AxiosConfig())
             .then(res => {
                 const message = res.data.message
                 alert((message))
@@ -45,14 +38,15 @@ export default function Login() {
                 
             })
     }
-    return (<>
-        <div>ID와 PW를 입력하세요.</div>
+    return (<div className="text-center">
+        <div className="text-3xl font-bold underline" >ID와 PW를 입력하세요.</div>
         <h2>Login</h2>
         <h3>ID</h3>
-        <input type="text" onChange={handleUserName} />
+        <Input type="text" placeholder="Enter ID" onChange={handleUserName} />
         <h3>PW</h3>
-        <input type="text" onChange={handlePW} />
-        <button onClick={handleSubmit}>로그인</button><br />
+        <Input type="text" placeholder="Enter Password" onChange={handlePW} /><br /><br />
+        <label><input type="checkbox"checked={true} name="remember"style={{ marginBottom: 15 }} /> Remember me</label><br />
+        <Button onClick={handleSubmit}>로그인</Button><br />
         <Link href={"/"}> 홈</Link><br />
-    </>)
+    </div>)
 }
