@@ -1,3 +1,6 @@
+import axios from "axios"
+
+
 export default function AxiosConfig(){
     return {
         headers: {
@@ -8,3 +11,5 @@ export default function AxiosConfig(){
         }
     }
 }
+
+export const instance = axios.create({ baseURL : 'http://localhost:8080/api'})

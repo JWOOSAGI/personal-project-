@@ -5,7 +5,7 @@ import axios from "axios"
 import Link from "next/link";
 import './globals.css'
 import { Button, Input } from "@mui/material";
-import { PG } from "./atmos/enums/PG";
+import { PG } from "@/redux/common/enums/PG";
 
 const SERVER = 'http://localhost:8080'
 export default function Home() {
@@ -39,8 +39,8 @@ export default function Home() {
   <Link href={`${PG.USER}/login`}>로그인</Link><br />
   <Link href={`${PG.USER}/join`}>회원가입</Link><br />
   <Link href={`${PG.BOARD}/articles`}>게시판</Link><br />
-  <Link href={`${PG.DEMOS}/mui-demo`}>MUI 데모</Link><br />
-  <Link href={`${PG.DEMOS}/counter`}>counter</Link><br />
-  <Link href={`${PG.DEMOS}/counter/container`}>container</Link><br />
+  <Link href={`${PG.DEMO}/mui-demo`}>MUI 데모</Link><br />
+  <Link href={`${PG.DEMO}/counter`}>React Counter Demo</Link><br />
+  <Link href={`${PG.DEMO}/redux-counter`}>Redux Counter Demo</Link><br />
   </div>)
 }

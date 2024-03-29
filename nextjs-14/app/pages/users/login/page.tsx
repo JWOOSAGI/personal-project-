@@ -5,11 +5,12 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Button, Input } from "@mui/material";
-import AxiosConfig from "@/app/organisms/configs/axios-config"
-import { API } from "@/app/atmos/enums/API"
+import AxiosConfig from "@/redux/common/configs/axios-config"
+import { API } from "@/redux/common/enums/API"
+import { NextPage } from "next"
 
 const SERVER = 'http://localhost:8080'
-export default function Login() {
+const Login:NextPage = () => {
     const [userName, setUserName] = useState('')
     const [PW, setPW] = useState('')
     const handleUserName = (e: any) => {
@@ -50,3 +51,4 @@ export default function Login() {
         <Link href={"/"}> 홈</Link><br />
     </div>)
 }
+export default Login;

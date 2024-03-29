@@ -44,8 +44,6 @@ public class UserController {
                 .passwordConfirm((String) paramMap.get("pswrepeat"))
                 .phone((String) paramMap.get("phone"))
                 .job((String) paramMap.get("job"))
-                .height(Double.parseDouble(strHeight))
-                .weight(Double.parseDouble(strWeight))
                 .build());
 
         System.out.println("DB에 저장된 User 정보 : "+newUser);

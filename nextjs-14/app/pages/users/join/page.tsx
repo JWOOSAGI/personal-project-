@@ -3,12 +3,13 @@
 import axios from "axios"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import AxiosConfig from "@/app/organisms/configs/axios-config"
-import { API } from "@/app/atmos/enums/API"
+import AxiosConfig from "@/redux/common/configs/axios-config"
 import { Button, Input } from "@mui/material"
+import { API } from "@/redux/common/enums/API"
+import { NextPage } from "next"
 const SERVER = 'http://localhost:8080'
 
-export default function Join() {
+const Join:NextPage = () =>{
   const [username, setUserName] = useState('')
   const handleUserName = (e: any) => {
     setUserName(e.target.value)
@@ -29,21 +30,14 @@ export default function Join() {
   const handleJob = (e: any) => {
     setJob(e.target.value)
   }
-  const [height, setHeight] = useState('')
-  const handleHeight = (e: any) => {
-    setHeight(e.target.value)
-  }
-  const [weight, setWeight] = useState('')
-  const handleWeight = (e: any) => {
-    setWeight(e.target.value)
-  }
+  
   const router = useRouter();
 
   const handleSubmit = (e: any) => {
     e.preventDeafult()
-    alert('리퀘스트가 가져가는 정보 : ' + username + psw + pswrepeat + phone + job + height + weight)
+    alert('리퀘스트가 가져가는 정보 : ' + username + psw + pswrepeat + phone + job )
     
-    axios.post(`${API.SERVER}/users`, { username, psw, pswrepeat,phone, job, height, weight }, AxiosConfig()) 
+    axios.post(`${API.SERVER}/users`, { username, psw, pswrepeat,phone, job }, AxiosConfig()) 
       .then(res => {
         alert("리스폰스가 가져온 이름 : " + JSON.stringify(res.data))
         router.push("/login")
@@ -69,12 +63,6 @@ export default function Join() {
 
       <label htmlFor="job"><b>Job</b><br /></label>
       <Input onChange={handleJob}type="text"placeholder="Enter Job"name="job" required /><br /><br />
-
-      <label htmlFor="height"><b>Height</b><br /></label>
-      <Input onChange={handleHeight}type="text"placeholder="Enter Height"name="height" required /><br /><br />
-
-      <label htmlFor="weight"><b>Weight</b><br /></label>
-      <Input onChange={handleWeight}type="text"placeholder="Enter Weight"name="weight" required /><br /><br />
       
       <label><input type="checkbox"checked={true} name="remember"style={{ marginBottom: 15 }} /> Remember me</label>
       <div className="clearfix">
@@ -86,3 +74,5 @@ export default function Join() {
     </div>
   </div>)
 }
+
+export default Join;
