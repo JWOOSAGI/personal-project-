@@ -5,8 +5,9 @@ export const getAllArticlesAPI = async (page: number) => {
         const response = await instance.get('/all-articles',{
             params: {page, limit:10}
         })
-        return console.log(response.data)
+        return response.data
     }catch(error){
         console.log(error)
+        return error
     }
 }

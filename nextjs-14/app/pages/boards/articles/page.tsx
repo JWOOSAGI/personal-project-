@@ -26,7 +26,7 @@ const Articles:NextPage=() =>{
     const [articles, setArticles] = useState([]);
 
     useEffect(() => {
-        dispatch(getAllArticles())
+        dispatch(getAllArticles(1))
     }, [])
     
     return (<>

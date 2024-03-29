@@ -7,11 +7,11 @@ import { API } from "@/redux/common/enums/API";
 
 export const getAllArticles: any = createAsyncThunk(
     'articles/getAllArticles',
-    (page: number, { rejectWithValue }) => {
+     async (page: number) => {
         console.log('getArticles page : ' + page)
-        const {message, result} : any = getAllArticlesAPI(1);
+        const { message, result }: any = await getAllArticlesAPI(1);
         console.log('----- API를 사용한 경우 -----')
-        console.log('message : '+ message)
-        console.log(JSON.stringify(result))
+        console.log(message);
+        console.log(result);
     }
 )
