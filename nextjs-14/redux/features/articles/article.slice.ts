@@ -1,44 +1,49 @@
+import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllArticles } from './article.service';
-import { initialState } from '../counter/counter.init';
+import { IArticle } from './article.model';
+import { initialState } from './article.init';
+import { fetchAllArticles } from './article.service';
 
-
-const articleThunks = [getAllArticles]
+const articleThunks = [fetchAllArticles]
 
 const status = {
-    pending : 'pending',
-    fulfilled : 'fulfilled',
-    rejected:'rejected'
+    pending: 'pending',
+    fulfilled: 'fulfilled',
+    rejected: 'rejected'
 }
 
-
-const handlePending = (state : any) => {
+const handleFulfilled =  (state: any, {payload}: any) => {
+    console.log('------------------ conclusion ---------------')
+    state.array = payload
+    console.log(state.array)
 
 }
-const handlefulfilled = (state : any) => {
-    
-}
-const handlerejected = (state : any) => {
-    
-}
-    
 
+const handlePending = (state: any) => {
+  
+}
+const handleRejected = (state: any) => {
+  
+}
 
 export const articleSlice = createSlice({
-    name: "article",
+    name: "articles",
     initialState,
     reducers: {},
-    extraReducers : builder => {
+    extraReducers: builder => {
         const {pending, rejected} = status;
 
         builder
-        .addCase(getAllArticles.fulfilled, (state, {payload}: any) => {
-            console.log('---------- conclusion ----------')
-            console.log(JSON.stringify(payload))
-        })
-
+        .addCase(fetchAllArticles.fulfilled, handleFulfilled)
+  
     }
 })
+export const getAllArticles = (state: any) => {
+    console.log('------------------ Before useSelector ---------------')
+    console.log(JSON.stringify(state.article.array.result))
+    return state.article.array.result;
+}
 
 export const {} = articleSlice.actions
 

@@ -7,9 +7,11 @@ import { useState, useEffect } from "react"
 import {Box, Button, Input} from '@mui/material';
 import AxiosConfig from "@/redux/common/configs/axios-config";
 import { API } from "@/redux/common/enums/API";
-import { NextPage } from "next";
 import { useSelector, useDispatch } from 'react-redux'
-import { getAllArticles } from "@/redux/features/articles/article.service";
+import { NextPage } from "next";
+import { fetchAllArticles } from "@/redux/features/articles/article.service";
+import { getAllArticles } from "@/redux/features/articles/article.slice";
+import Columns from "@/app/components/articles/columns";
 // import React from "react";
 
 interface IArticle {
@@ -20,42 +22,43 @@ interface IArticle {
     registerDate: string
 }
 
-const Articles:NextPage=() =>{
-    const dispatch = useDispatch();
-    const router = useRouter();
-    const [articles, setArticles] = useState([]);
+const ArtilcesPage: NextPage = ({data}:any) => {
+    const dispatch = useDispatch()
+ 
+   const allArticles: [] = useSelector(getAllArticles)
+
+    if(allArticles !== undefined){
+        console.log('allArticles is not undefined')
+        
+        console.log('length is '+ allArticles.length)
+        for(let i=0; i< allArticles.length; i++){
+            console.log(JSON.stringify(allArticles[i]))
+        }
+    }else{
+        console.log('allArticles is undefined')
+    }
+    
 
     useEffect(() => {
-        dispatch(getAllArticles(1))
+        dispatch(fetchAllArticles(1))
     }, [])
-    
     return (<>
         <h2>Article</h2>
-        <table border={1}>
-            <thead>
-                <tr>
-                    <th>title</th>
-                    <th>content</th>
-                    <th>writer</th>
-                    <th>registerDate</th>
-                </tr>
-            </thead>
-            <tbody>
-                {articles.map((props: IArticle) => (
-                    <tr key={props.id}>
-                        <td>{props.title}</td>
-                        <td>{props.content}</td>
-                        <td>{props.writer}</td>
-                        <td>{props.registerDate}</td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+        <Box sx={{ height: 400, width: '100%' }}>
+      <DataGrid
+        rows={data()}
+        columns={Columns()}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 5,
+            },
+          },
+        }}
+        pageSizeOptions={[5]}
+        checkboxSelection
+        disableRowSelectionOnClick
+      />
+    </Box>
     </>)
-}
-
-export default Articles;
-
-function dispatch(arg0: any) {
-    throw new Error("Function not implemented.");
 }
