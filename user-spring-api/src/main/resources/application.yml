@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: api
+  datasource:
+    url: jdbc:mysql://localhost:3306/userdb
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: true
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+
+
+# ????? create ?? update ????? validate
+    #??? warnning ???? ?? : sping.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+    #??? ??? sql ??? : spring.jpa.show-sql=true
+    #sql ?? ?? ?? : format_sql=true
+    #sql ?? ?? ?? : descriptor.sql=trace

@@ -18,9 +18,9 @@ const Join:NextPage = () =>{
   const handlePsw = (e: any) => {
     setpsw(e.target.value)
   }
-  const [pswrepeat, setPswRepeat] = useState('')
-  const handlePswRepeat = (e: any) => {
-    setPswRepeat(e.target.value)
+  const [name, setName] = useState('')
+  const handleName = (e: any) => {
+    setName(e.target.value)
   }
   const [phone, setPhone] = useState('')
   const handlePhone = (e: any) => {
@@ -35,9 +35,9 @@ const Join:NextPage = () =>{
 
   const handleSubmit = (e: any) => {
     e.preventDeafult()
-    alert('리퀘스트가 가져가는 정보 : ' + username + psw + pswrepeat + phone + job )
+    alert('리퀘스트가 가져가는 정보 : ' + username + psw + name + phone + job )
     
-    axios.post(`${API.SERVER}/users`, { username, psw, pswrepeat,phone, job }, AxiosConfig()) 
+    axios.post(`${API.SERVER}/users`, { username, psw, name, phone, job }, AxiosConfig()) 
       .then(res => {
         alert("리스폰스가 가져온 이름 : " + JSON.stringify(res.data))
         router.push("/login")
@@ -55,8 +55,8 @@ const Join:NextPage = () =>{
       <label htmlFor="psw"><b>Password</b><br /></label>
       <Input onChange={handlePsw}type="password"placeholder="Enter Password"name="psw" required /><br /><br />
 
-      <label htmlFor="psw-repeat"><b>Repeat Password</b><br /></label>
-      <Input onChange={handlePswRepeat}type="password"placeholder="Enter Repeat Password"name="psw-repeat" required /><br /><br />
+      <label htmlFor="name"><b>Name</b><br /></label>
+      <Input onChange={handleName}type="text"placeholder="Enter Name"name="name" required /><br /><br />
 
       <label htmlFor="phone"><b>Phone Number</b><br /></label>
       <Input onChange={handlePhone}type="text"placeholder="Enter Phone Number"name="phone" required /><br /><br />

@@ -12,7 +12,7 @@ export default function Columns(): GridColDef[]{
             field: 'id',
             headerName: 'No.',
             renderCell(){
-                return<></>
+                return <></>
             }
         },
         {
