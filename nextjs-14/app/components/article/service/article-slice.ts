@@ -24,9 +24,15 @@ export const articleSlice = createSlice({
         builder
         .addCase(findAllArticles.fulfilled,  (state: any, {payload}: any) => {state.array = payload})
 
+
+
+
+
+
     }
 })
-export const getAllArticles = (state: any) =>( state.article.array)
+export const getAllArticles = (state: any) =>( state.article.array )
+export const getArticleById = (state: any) =>( state.article.json )
 export const {} = articleSlice.actions
 
 export default articleSlice.reducer;

@@ -17,16 +17,16 @@ const ArticleListPage: NextPage = ({data}:any) => {
  
    const allArticles: [] = useSelector(getAllArticles)
 
-    if(allArticles !== undefined){
-        console.log('allArticles is not undefined')
+    // if(allArticles !== undefined){
+    //     console.log('allArticles is not undefined')
         
-        console.log('length is '+ allArticles.length)
-        for(let i=0; i< allArticles.length; i++){
-            console.log(JSON.stringify(allArticles[i]))
-        }
-    }else{
-        console.log('allArticles is undefined')
-    }
+    //     console.log('length is '+ allArticles.length)
+    //     for(let i=0; i< allArticles.length; i++){
+    //         console.log(JSON.stringify(allArticles[i]))
+    //     }
+    // }else{
+    //     console.log('allArticles is undefined')
+    // }
     
 
     useEffect(() => {

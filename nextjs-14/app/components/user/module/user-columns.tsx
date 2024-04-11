@@ -1,6 +1,7 @@
-import { Typography } from "@mui/material";
+import { Link, Typography } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import { UserColumn } from "../model/user-column";
+import { PG } from "../../common/enums/PG";
 
 
 interface CellType{
@@ -26,7 +27,9 @@ export default function UserColumns(): GridColDef[]{
             sortable: false,
             field: 'username',
             headerName: '아이디',
-            renderCell: ({row}:CellType) =>  <Typography textAlign="center" sx={{fontSize:"1.5rem"}}>  {row.username}</Typography>
+            renderCell: ({row}:CellType) =>  <Typography textAlign="center" sx={{fontSize:"1.5rem"}}>
+            <Link href={`${PG.USER}/detail/${row.id}`} className="underline" > {row.username} </Link>
+            </Typography>
         },
         {
             flex: 0.04,

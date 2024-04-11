@@ -11,7 +11,7 @@ import { NextPage } from "next";
 export default function BoardDetailPage (props:any) {
 
     useEffect(() => {
-        dispatch(findBoardById(props.params.id))
+        //dispatch(findBoardById(props.params.id))
     }, [])
 
     return (<>

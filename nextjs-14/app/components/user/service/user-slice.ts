@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { createSlice } from "@reduxjs/toolkit";
 import { IUser } from '../model/user';
 import { initialState } from './user-init';
-import { findAllUsers } from './user-service';
+import { findAllUsers, finduserById } from './user-service';
 
 const articleThunks = [findAllUsers]
 
@@ -36,6 +36,7 @@ export const userlice = createSlice({
 
         builder
         .addCase(findAllUsers.fulfilled, handleFulfilled)
+        .addCase(finduserById.fulfilled, handleFulfilled)
   
     }
 })
@@ -44,6 +45,9 @@ export const getAlluser = (state: any) => {
     console.log(JSON.stringify(state.user.array))
     return state.user.array;
 }
+
+export const getUserById = (state: any) => (state.user.array)
+
 
 export const {} = userlice.actions
 

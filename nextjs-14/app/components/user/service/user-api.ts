@@ -12,3 +12,15 @@ export const findAllUsersAPI = async (page: number) =>{
     }
     
 }
+export const finduserByIdAPI = async (id: number) =>{
+    try{
+        const response = await instance.get('/users/detail',{
+            params: {id}
+        })
+        return response.data
+    }catch(error){
+        console.log(error)
+        return error
+    }
+    
+}
