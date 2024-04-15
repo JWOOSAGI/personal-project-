@@ -24,7 +24,6 @@ export const findArticleById: any = createAsyncThunk(
     async (id: number)=>{
         // console.log('fetchAllArticles page : '+ id)
         const data:any = await findArticleByIdAPI(id);
-        const {message, result}:any = data
         // console.log('----- API 를 사용한 경우 -----')
         // console.log('message : '+ message)
         // console.log(JSON.stringify(result))

@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useRouter } from 'next/navigation';
 
-const pages = ['회원가입','로그인', '카운터','게시판목록','게시글목록', '사용자목록'];
+const pages = ['카운터','게시판목록','게시글목록', '사용자목록'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Header() {
@@ -32,8 +32,6 @@ function Header() {
 
   const handleCloseNavMenu = (event: any) => {
     switch(event.target.innerText){
-      case "회원가입" : router.push("/pages/user/register"); break;
-      case "로그인" : router.push("/pages/user/login"); break;
       case "카운터" : router.push("/pages/demo/counter"); break;
       case "게시판목록" : router.push("/pages/board/list"); break;
       case "게시글목록" : router.push("/pages/article/list"); break;
@@ -54,7 +52,7 @@ function Header() {
             variant="h6"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },

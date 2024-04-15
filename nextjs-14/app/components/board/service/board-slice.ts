@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { createSlice } from "@reduxjs/toolkit";
 import { IBoard } from '../model/board';
 import { initialState } from './board-init';
-import { findAllBoards } from './board-service';
+import { findAllBoards, findBoardById } from './board-service';
 
 const boardThunks = [findAllBoards]
 
@@ -36,7 +36,7 @@ export const boardSlice = createSlice({
 
         builder
         .addCase(findAllBoards.fulfilled, handleFulfilled)
-  
+        .addCase(findBoardById.fulfilled, (state:any,{payload} : any) => {state.array = payload})
     }
 })
 export const getAllBoards = (state: any) => {
@@ -45,6 +45,7 @@ export const getAllBoards = (state: any) => {
     return state.board.array;
 }
 
+export const getBoardById = (state:any) => (state.board.array)
 export const {} = boardSlice.actions
 
 export default boardSlice.reducer;

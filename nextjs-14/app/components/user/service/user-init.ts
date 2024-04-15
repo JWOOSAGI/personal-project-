@@ -9,5 +9,6 @@ export const initialState:IUser = {
     job: '',
     email : '',
     regDate : '',
-    modDate :  ''
+    modDate :  '',
+    message : ''
 }

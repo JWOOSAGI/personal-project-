@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { createSlice } from "@reduxjs/toolkit";
 import { IUser } from '../model/user';
 import { initialState } from './user-init';
-import { findAllUsers, finduserById } from './user-service';
+import { findAllUsers, findUserById, loginUser } from './user-service';
 
 const articleThunks = [findAllUsers]
 
@@ -13,32 +13,19 @@ const status = {
     rejected: 'rejected'
 }
 
-const handleFulfilled =  (state: any, {payload}: any) => {
-    console.log('------------------ conclusion ---------------')
-    state.array = payload
-    console.log(state.array)
 
-}
-
-const handlePending = (state: any) => {
-  
-}
-const handleRejected = (state: any) => {
-  
-}
-
-export const userlice = createSlice({
+export const userSlice = createSlice({
     name: "user",
     initialState,
-    reducers: {},
-    extraReducers: builder => {
-        const {pending, rejected} = status;
+    reducers: {}, //내부 연산
+    extraReducers: builder => { //자바연동
+        const { pending, rejected } = status; //진행중, 거부
 
         builder
-        .addCase(findAllUsers.fulfilled, handleFulfilled)
-        .addCase(finduserById.fulfilled, handleFulfilled)
-  
-    }
+            .addCase(findAllUsers.fulfilled, (state: any, {payload}: any) => {state.array=payload})
+            .addCase(findUserById.fulfilled, (state: any, { payload }: any) => { state.array = payload;})
+            .addCase(loginUser.fulfilled, (state: any, { payload }: any) => {state.message = payload;})
+    },
 })
 export const getAlluser = (state: any) => {
     console.log('------------------ Before useSelector ---------------')
@@ -47,8 +34,10 @@ export const getAlluser = (state: any) => {
 }
 
 export const getUserById = (state: any) => (state.user.array)
+export const getUser = (state: any) => (state.user.array)
+export const getMessage = (state: any) => (state.user.message)
 
 
-export const {} = userlice.actions
+export const { } = userSlice.actions
 
-export default userlice.reducer;
+export default userSlice.reducer;
