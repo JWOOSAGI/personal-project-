@@ -2,23 +2,19 @@
 
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import AxiosConfig from "@/app/components/common/configs/axios-config"
-import { API } from "@/app/components/common/enums/API"
-import { NextPage } from "next"
-import axios from "axios"
 import Link from "next/link";
 import './globals.css'
 import { useDispatch } from "react-redux";
 import { loginUser } from "./components/user/service/user-service";
 import { useSelector } from "react-redux";
-import { getMessage } from "./components/user/service/user-slice";
+import { getAuth } from "./components/user/service/user-slice";
 import { IUser } from "./components/user/model/user";
-import { Message } from "@mui/icons-material";
+import nookies, { parseCookies, setCookie } from 'nookies'
 
 export default function Home() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const message = useSelector(getMessage)
+  const auth = useSelector(getAuth)
 
   const [user, setUser] = useState({} as IUser)
 
@@ -41,15 +37,17 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if (message === 'SUCCESS') {
+    if (auth.message === 'SUCCESS') {
+      setCookie({},'message', auth.message, { httpOnly: false, path: '/' })
+      console.log('서버에서 넘어온 메시지'+parseCookies().message)
+      console.log('서버에서 넘어온 토큰'+parseCookies().token)
       router.push('/pages/board/list')
     } else {
       console.log('LOGIN FAIL')
     }
-  }, [message])
+  }, [auth])
 
 return (<div className="text-center">
-
   <div className="text-3xl font-bold underline">Welcom To React World !!!</div><br />
   <div className="flex items-center justify-center  w-full px-5 sm:px-0">
     <div className="flex bg-white rounded-lg shadow-lg border overflow-hidden max-w-sm lg:max-w-4xl w-full">

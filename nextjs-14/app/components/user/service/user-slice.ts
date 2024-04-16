@@ -1,8 +1,5 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import { createSlice } from "@reduxjs/toolkit";
 import { IUser } from '../model/user';
-import { initialState } from './user-init';
 import { findAllUsers, findUserById, loginUser } from './user-service';
 
 const articleThunks = [findAllUsers]
@@ -13,6 +10,22 @@ const status = {
     rejected: 'rejected'
 }
 
+interface IAuth{
+    message? : string
+    token? : string
+}
+
+interface UserState {
+    array? : Array<IUser>
+    json? : IUser
+    auth? : IAuth
+}
+
+export const initialState:UserState= {
+    json: {} as IUser, //IUser json = new json 라는 뜻
+    array : [],
+    auth: {} as IAuth
+}
 
 export const userSlice = createSlice({
     name: "user",
@@ -24,7 +37,7 @@ export const userSlice = createSlice({
         builder
             .addCase(findAllUsers.fulfilled, (state: any, {payload}: any) => {state.array=payload})
             .addCase(findUserById.fulfilled, (state: any, { payload }: any) => { state.array = payload;})
-            .addCase(loginUser.fulfilled, (state: any, { payload }: any) => {state.message = payload;})
+            .addCase(loginUser.fulfilled, (state: any, { payload }: any) => {state.auth = payload;})
     },
 })
 export const getAlluser = (state: any) => {
@@ -35,7 +48,7 @@ export const getAlluser = (state: any) => {
 
 export const getUserById = (state: any) => (state.user.array)
 export const getUser = (state: any) => (state.user.array)
-export const getMessage = (state: any) => (state.user.message)
+export const getAuth = (state: any) => (state.user.auth)
 
 
 export const { } = userSlice.actions
